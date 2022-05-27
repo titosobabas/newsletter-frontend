@@ -25,9 +25,8 @@ export const submitNewsletterAction = (emailNewsletter = '') => async(dispatch) 
     dispatch({
         type: LOADING
     })
-
     try {
-        const response = await fetch('http://localhost:1323/newsletter', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/newsletter`, {
             method: "POST",
             body: JSON.stringify({
                 email: emailNewsletter

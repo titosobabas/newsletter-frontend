@@ -5,11 +5,7 @@ const Newsletter = () => {
     const dispatch = useDispatch()
 
     const {loading, response} = useSelector(store => store.newsletter)
-    console.log(loading)
-    console.log(response)
-
     const [emailNewsletter, setEmailNewsletter] = React.useState('')
-
     const sendEmailNewsletter = (e) => {
         e.preventDefault()
 
