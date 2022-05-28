@@ -33,6 +33,7 @@ export const getNewsletterEmailsSuscribed = () => async(dispatch) => {
         method: "GET",
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
+            'Access-Control-Allow-Origin': '*',
         }
     })
 
@@ -56,6 +57,7 @@ export const submitNewsletterAction = (_emailNewsletter = '') => async(dispatch,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
+                'Access-Control-Allow-Origin': '*',
             }
         })
 
