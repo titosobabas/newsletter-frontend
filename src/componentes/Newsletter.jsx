@@ -3,8 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {submitNewsletterAction} from "../redux/newsletterDucks";
 const Newsletter = () => {
     const dispatch = useDispatch()
-
-    const {loading, response} = useSelector(store => store.newsletter)
+    const {loading, newsletterResponse, emailsSuscribed} = useSelector(store => store.newsletter)
     const [emailNewsletter, setEmailNewsletter] = React.useState('')
     const sendEmailNewsletter = (e) => {
         e.preventDefault()
@@ -23,16 +22,16 @@ const Newsletter = () => {
 
     return (
         <div>
-            <h2>Newsletter app</h2>
+            <h2>Please enter below your email address for suscribe you to the newsletter</h2>
             {
-                (response!==false) && (
-                    (response.Success === true) ? (
+                (newsletterResponse!==false) && (
+                    (newsletterResponse.success === true) ? (
                         <div className="alert alert-success" role="alert">
-                            <strong>{response.Response}</strong>
+                            <strong>{newsletterResponse.response}</strong>
                         </div>
                     ) : (
                         <div className="alert alert-danger" role="alert">
-                            Error: <strong>{response.Response}</strong>
+                            Error: <strong>{newsletterResponse.response}</strong>
                         </div>
                     )
                 )
@@ -48,7 +47,7 @@ const Newsletter = () => {
                         className="form-control"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        placeholder="Enter email"
+                        placeholder="my@email.com"
                         required/>
                         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone
                             else.</small>
@@ -63,6 +62,32 @@ const Newsletter = () => {
                             <span className="sr-only">Loading...</span>
                         </div>
                         <span className="p-2">Suscribing, please wait...</span>
+                    </>
+                )
+            }
+            {
+                (emailsSuscribed !== false) && (
+                    <>
+                        <hr />
+                        <h2>Emails suscribed</h2>
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th>Email</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                emailsSuscribed.map((item, key) => {
+                                    return (
+                                        <tr key={key}>
+                                          <td>{item.email_address}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            </tbody>
+                        </table>
                     </>
                 )
             }
